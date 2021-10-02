@@ -1,0 +1,42 @@
+main {
+    display: flex;
+    justify-content: center;
+}
+
+
+header {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 600px;
+    height: max-content;
+}
+
+.card h1 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: large;
+}
+
+.card h2 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
+}
+
+button {
+    background-color: darkcyan;
+    color: white;
+    height: 40px;
+    width: max-content;
+    margin: 5px;
+}
+
+button:hover {
+    cursor: pointer;
+}
