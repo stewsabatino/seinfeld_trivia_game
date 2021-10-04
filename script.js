@@ -7,6 +7,7 @@ var ans1 = document.getElementById("ans1");
 var ans2 = document.getElementById("ans2");
 var ans3 = document.getElementById("ans3");
 var ans4 = document.getElementById("ans4");
+var startBtn = document.getElementById("start")
 var $footer = document.querySelector("footer");
 var $btn = document.querySelectorAll(".btn")
 
@@ -15,8 +16,9 @@ function init() {
     $timeLeftCountdown.textContent = "Time Left: 60";
     $h1.textContent = "Welcome to SEINFELD TRIVIA!!!!";
     $h2.textContent = "You will have 60 seconds to answer 6 Seinfeld related questions. Got a question wrong? 8 seconds will be deducted from the time left. Think you have a high score? Put your initials in at the end of the game and compare with others and yourself! When you are ready, click the start button and the trivia game will begin!";
-    ans1.textContent = "START";
-    ans2.textContent = "Don't Start";
+    startBtn.textContent = "START"
+    ans1.style.visibility = "hidden";
+    ans2.style.visibility = "hidden";
     ans3.style.visibility = "hidden";
     ans4.style.visibility = "hidden";
 };
@@ -26,7 +28,9 @@ function init() {
 var q1 = function () {
     console.log("start q1");
     $h1.style.visibility = "hidden"
+    startBtn.remove();
     $h2.textContent = "A Seinfeld Question regarding Jerry Seinfeld";
+    ans1.style.visibility = "visible"
     ans1.dataset.state = "false"
     ans1.textContent = "Wrong Answer"
     ans2.style.visibility = "visible"
@@ -97,13 +101,17 @@ function nextQuestion() {
     }
 };
 
-function selectAnswer() {
+function selectAnswer(event) {
     var element = event.target;
 
     if (element.matches(".btn")) {
 
         var state = element.getAttribute("data-state")
-        if (state === "true") {
+        if (state === "start") {
+            console.log("start timer")
+            // start timer
+            nextQuestion();
+        } else if (state === "true") {
             console.log("started");
             nextQuestion();
         } else {
