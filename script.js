@@ -1,5 +1,5 @@
 var $a = document.querySelector("a");
-var $timeLeftCountdown = document.getElementById("timeLeft");
+var $countdown = document.getElementById("timeLeft");
 var $card = document.getElementById("card");
 var $h1 = document.querySelector("h1");
 var $h2 = document.querySelector("h2");
@@ -10,10 +10,11 @@ var ans4 = document.getElementById("ans4");
 var startBtn = document.getElementById("start")
 var $footer = document.querySelector("footer");
 var $btn = document.querySelectorAll(".btn")
+var secondsLeft = 60;
 
 
 function init() {
-    $timeLeftCountdown.textContent = "Time Left: 60";
+    $countdown.textContent = "Time Left: 60s";
     $h1.textContent = "Welcome to SEINFELD TRIVIA!!!!";
     $h2.textContent = "You will have 60 seconds to answer 6 Seinfeld related questions. Got a question wrong? 8 seconds will be deducted from the time left. Think you have a high score? Put your initials in at the end of the game and compare with others and yourself! When you are ready, click the start button and the trivia game will begin!";
     startBtn.textContent = "START"
@@ -101,6 +102,25 @@ function nextQuestion() {
     }
 };
 
+
+
+function setTime() {
+  // Sets interval in variable
+  var timerInterval = setInterval(function() {
+    secondsLeft--;
+    $countdown.textContent = "Time Left: " + secondsLeft + "s";
+
+    // if(secondsLeft === 0) {
+    //   // Stops execution of action at set interval
+    //   clearInterval(timerInterval);
+    //   // Calls function to create and append image
+    //   sendMessage();
+    // }
+
+  }, 1000);
+}
+
+
 function selectAnswer(event) {
     var element = event.target;
 
@@ -109,7 +129,7 @@ function selectAnswer(event) {
         var state = element.getAttribute("data-state")
         if (state === "start") {
             console.log("start timer")
-            // start timer
+            setTime();
             nextQuestion();
         } else if (state === "true") {
             console.log("started");
