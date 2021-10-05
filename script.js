@@ -86,6 +86,18 @@ var q4 = function () {
     ans4.textContent = "Right Answer"
 };
 
+var scoreCard = function () {
+    $h1.style.visibility = "visible"
+    $h1.textContent = "High Scores"
+    $h2.textContent = "Enter your score!"
+    $countdown.style.visibility = "hidden"
+    ans1.style.visibility = "hidden"
+    ans2.style.visibility = "hidden"
+    ans3.style.visibility = "hidden"
+    ans4.style.visibility = "hidden"
+}
+
+
 var questionArray = [q1, q2, q3, q4];
 
 function nextQuestion() {
@@ -98,7 +110,9 @@ function nextQuestion() {
         console.log("answer 3 state " + ans3.dataset.state)
         console.log("answer 4 state " + ans4.dataset.state)
     } else {
-        // scorecard
+        // save seconds
+        console.log(secondsLeft)
+        scoreCard()
     }
 };
 
@@ -110,16 +124,27 @@ function setTime() {
     secondsLeft--;
     $countdown.textContent = "Time Left: " + secondsLeft + "s";
 
-    // if(secondsLeft === 0) {
-    //   // Stops execution of action at set interval
-    //   clearInterval(timerInterval);
-    //   // Calls function to create and append image
-    //   sendMessage();
-    // }
+    if (secondsLeft === 0) {
+        // save seconds
+        console.log(secondsLeft)
+        // Calls function to go to highscores
+        scoreCard()
+
+    }
 
   }, 1000);
 }
 
+function wrongAnswer() {
+    secondsLeft--
+    secondsLeft--
+    secondsLeft--
+    secondsLeft--
+    secondsLeft--
+    secondsLeft--
+    secondsLeft--
+    secondsLeft--
+}
 
 function selectAnswer(event) {
     var element = event.target;
@@ -135,7 +160,7 @@ function selectAnswer(event) {
             console.log("started");
             nextQuestion();
         } else {
-            // subtract time
+            wrongAnswer() 
             console.log("wrong answer")
             nextQuestion();
         }
