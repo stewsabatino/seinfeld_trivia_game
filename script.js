@@ -15,7 +15,7 @@ var $btn = document.querySelectorAll(".btn")
 // Start time
 var secondsLeft = 40;
 
-
+// initial load onto webpage (homepage)
 function init() {
     $countdown.textContent = "Time Left: 40s";
     $h1.textContent = "Welcome to SEINFELD TRIVIA!!!!";
@@ -28,7 +28,7 @@ function init() {
 };
 
 
-        
+// Question 1 and answers
 var q1 = function () {
     console.log("start q1");
     $h1.style.visibility = "hidden"
@@ -48,6 +48,7 @@ var q1 = function () {
     ans4.textContent = "Jackie Chiles"
 };
 
+// Question 2
 var q2 = function () {
     console.log("start q2");
     $h2.textContent = "What are the names of George's horses?";
@@ -61,6 +62,7 @@ var q2 = function () {
     ans4.textContent = "G-bone and T-bone"
 };
 
+// Question 3
 var q3 = function () {
     console.log("star q3");
     $h1.style.visibility = "hidden"
@@ -75,6 +77,7 @@ var q3 = function () {
     ans4.textContent = "He likes orange juice"
 };
 
+// Question 4
 var q4 = function () {
     console.log("start q4");
     $h1.style.visibility = "hidden"
@@ -89,9 +92,11 @@ var q4 = function () {
     ans4.textContent = "Sky Burger"
 };
 
+// highScoreForm and initalsInput global
 var highScoreForm;
 var initialsInput;
 
+// creating a form, input and putting them on the page
 function populateScoreCard() {
     highScoreForm = document.createElement("form")
     var initialsInput = document.createElement("input")
@@ -102,10 +107,12 @@ function populateScoreCard() {
 }
 
 
+// storing scores into local storage
 function storeInitials() {
     localStorage.setItem("scores", JSON.stringify(scores))
 }
 
+// getting stored scores and putting them on page
 function storedScores() {
     var storedScores = JSON.parse(localStorage.getItem("scores"))
 
@@ -119,6 +126,7 @@ function storedScores() {
     }
 }
 
+// high score page. Added populateScoreCard and storedScores to run
 var scoreCard = function () {
     $h1.style.visibility = "visible"
     $h1.textContent = "High Scores"
@@ -130,6 +138,7 @@ var scoreCard = function () {
     ans4.style.display = "none"
     populateScoreCard()
     storedScores()
+    // added event listener to input field to make ul, li and append the initials and score onto page
     $card.addEventListener("submit", function(event) {
         event.preventDefault()
 
@@ -146,22 +155,23 @@ var scoreCard = function () {
     } )
 }
 
-
+// questions in an array
 var questionArray = [q1, q2, q3, q4];
 
+// pull first question out of array and then delete it
 function nextQuestion() {
     if (questionArray.length > 0) {
-        console.log("choosing next question")
         questionArray[0]()
         questionArray.shift()
     } else {
+        // if no more questions, store seconds left and go to score card
         localStorage.setItem("score", secondsLeft)
-        console.log(secondsLeft)
         clearInterval(timerInterval)
         scoreCard()
     }
 };
 
+// timerInterval set to gloabal
 var timerInterval;
 
 function setTime() {
@@ -169,10 +179,9 @@ function setTime() {
     timerInterval = setInterval(function() {
     secondsLeft--;
     $countdown.textContent = "Time Left: " + secondsLeft + "s";
-
+    // Once timer hits 0 save score to local storage and run score card function
     if (secondsLeft <= 0) {
         localStorage.setItem("score", secondsLeft)
-        console.log(secondsLeft)
         clearInterval(timerInterval)
         // Calls function to go to highscores
         scoreCard()
@@ -182,32 +191,40 @@ function setTime() {
   }, 1000);
 }
 
+
+// When wrong answer is pressed, remove 8 seconds from timer and send alert
 function wrongAnswer() {
     secondsLeft = secondsLeft - 8
     alert("WRONG ANSWER")
 }
 
+// selecting answers function set through click event
 function selectAnswer(event) {
     event.preventDefault();
     var element = event.target;
 
+    // when a click is clicked in card element does it match a class .btn?
     if (element.matches(".btn")) {
 
         var state = element.getAttribute("data-state")
+        // if the state is start then start the timer and run next question function
         if (state === "start") {
             console.log("start timer")
             setTime();
             nextQuestion();
+        // if the state is true than alert that the answer is correct and run next question function
         } else if (state === "true") {
             alert("CORRECT ANSWER")
             nextQuestion();
+        // if the state of btn press is not true or start run wrong answer function and next question function
         } else {
             wrongAnswer() 
-            console.log("wrong answer")
             nextQuestion();
         }
     }
 };
 
+// run initial function on webpage load
 init();
+// event listener to start and run game
 $card.addEventListener("click", selectAnswer) 
