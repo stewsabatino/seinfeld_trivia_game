@@ -9,7 +9,6 @@ var ans2 = document.getElementById("ans2");
 var ans3 = document.getElementById("ans3");
 var ans4 = document.getElementById("ans4");
 var startBtn = document.getElementById("start")
-var $footer = document.querySelector("footer");
 var $btn = document.querySelectorAll(".btn")
 
 // Start time
