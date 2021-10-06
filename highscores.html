@@ -9,11 +9,21 @@
 <body>
     <div>
         <h1> Highscores!</h1>
-        <ol>
+        <script>
+            function storedScores() {
+    var storedScores = JSON.parse(localStorage.getItem("scorecard"))
 
-        </ol>
-        <button>Go Back</button>
-        <button>Clear Highscores</button>
+    if (storedScores !==null) {
+        var $ul = document.createElement("ul");
+        $card.appendChild($ul);
+        var li = document.createElement("li");
+        var initialsScore = storedScores
+        li.textContent = initialsScore
+        $ul.appendChild(li);
+    }
+}
+        <p>storedScores()</p>
+        </script>
     </div>
 </body>
 </html>
