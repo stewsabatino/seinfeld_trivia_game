@@ -113,7 +113,7 @@ function storeInitials() {
 
 // getting stored scores and putting them on page
 function storedScores() {
-    var storedScores = JSON.parse(localStorage.getItem("scores"))
+    var storedScores = JSON.parse(localStorage.getItem("scorecard"))
 
     if (storedScores !==null) {
         var $ul = document.createElement("ul");
