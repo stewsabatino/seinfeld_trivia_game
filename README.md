@@ -1,7 +1,7 @@
 # seinfeld_trivia_game
 * trivia game using html/css/javascript
 * HTML - https://stewsabatino.github.io/seinfeld_trivia_game/
-* Snippet - <img src="./picutre/seinfeld_game.png" alt="picture of first question of trivia game">
+* Snippet - <img src="./picture/seinfeld_game.png" alt="picture of first question of trivia game">
 
 
 # GOALS
